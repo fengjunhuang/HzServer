@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.TbBranchMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.TbBranch">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="BRANCH_ID" jdbcType="DECIMAL" property="branchId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="BRANCH_NAME" jdbcType="VARCHAR" property="branchName" />
+    <result column="CONTENT_ID" jdbcType="VARCHAR" property="contentId" />
+    <result column="NODE_TYPE" jdbcType="DECIMAL" property="nodeType" />
+    <result column="CREATE_DEPT_ID" jdbcType="DECIMAL" property="createDeptId" />
+    <result column="CHECK_DEPT_IDS" jdbcType="DECIMAL" property="checkDeptIds" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="htht.system.ocean.dao.FrontUserMapper">
+    <resultMap id="BaseResultMap" type="htht.system.ocean.system.front.model.UserDO">
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias"/>
+        <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId"/>
+        <result column="USER_ID" jdbcType="DECIMAL" property="userId"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="PIC_ID" jdbcType="DECIMAL" property="picId"/>
+    </resultMap>
+
+    <resultMap type="htht.system.ocean.system.front.model.UserDO" id="UserRoleNameResultMap">
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias"/>
+        <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId"/>
+        <result column="USER_ID" jdbcType="DECIMAL" property="userId"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName"/>
+        <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="PIC_ID" jdbcType="DECIMAL" property="picId"/>
+        <result column="STATUS" jdbcType="DECIMAL" property="status"/>
+    </resultMap>
+
+    <resultMap type="htht.system.ocean.system.front.model.UserDO" id="UserRolesResultMap">
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName"/>
+        <result column="USER_ALIAS" jdbcType="VARCHAR" property="userAlias"/>
+        <result column="DEPT_ID" jdbcType="DECIMAL" property="deptId"/>
+        <result column="USER_ID" jdbcType="DECIMAL" property="userId"/>
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName"/>
+        <result column="LOGIN_TIME" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="PIC_ID" jdbcType="DECIMAL" property="picId"/>
+        <collection property="userRoles" ofType="htht.system.ocean.system.front.model.UserRoleDO">
+            <id column="ID" jdbcType="DECIMAL" property="id" />
+            <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+            <result column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+            <result column="ROLE_NAME" jdbcType="DECIMAL" property="roleName" />
+        </collection>
+    </resultMap>
+
+    <select id="get" resultType="htht.system.ocean.system.front.model.UserDO"
+            resultMap="BaseResultMap">
+		select * from sys_user where user_id = #{value}
+	</select>
+
+    <select id="list" resultType="htht.system.ocean.system.front.model.UserDO"
+            resultMap="BaseResultMap">
+        select
+        *
+        from sys_user
+        <!--<where>-->
+        <!--<if test="userId != null and userId != ''">and USER_ID = #{userId}</if>-->
+        <!--<if test="username != null and username != ''">and USER_NAME = #{userName}</if>-->
+        <!--<if test="deptId != null and deptId != ''">and dept_id = #{deptId}</if>-->
+        <!--<if test="userAlias != null and userAlias != ''">and USER_ALIAS = #{userAlias}</if>-->
+        <!--<if test="deptName != null and deptName != ''">and DEPT_NAME = #{deptName}</if>-->
+        <!--<if test="loginTime != null and loginTime != ''">and LOGIN_TIME = #{loginTime}</if>-->
+        <!--</where>-->
+        order by Login_time desc
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from sys_user
+        <!--<where>-->
+        <!--<if test="userId != null and userId != ''">and USER_ID = #{userId}</if>-->
+        <!--<if test="username != null and username != ''">and USER_NAME = #{userName}</if>-->
+        <!--<if test="deptId != null and deptId != ''">and dept_id = #{deptId}</if>-->
+        <!--<if test="userAlias != null and userAlias != ''">and USER_ALIAS = #{userAlias}</if>-->
+        <!--<if test="deptName != null and deptName != ''">and DEPT_NAME = #{deptName}</if>-->
+        <!--<if test="loginTime != null and loginTime != ''">and LOGIN_TIME = #{loginTime}</if>-->
+        <!--</where>-->
+    </select>
+
+    <insert id="save" parameterType="htht.system.ocean.system.back.model.SysUserDO">
+		insert into sys_user
+		(
+			"USER_NAME",
+			"USER_ALIAS",
+			"DEPT_ID",
+			"DEPT_NAME",
+			"USER_ID",
+			"LOGIN_TIME"
+		)
+		values
+		(
+			#{userName,jdbcType=VARCHAR},
+			#{userAlias,jdbcType=VARCHAR},
+			#{deptId,jdbcType=DECIMAL},
+			#{deptName,jdbcType=VARCHAR},
+			#{userId,jdbcType=DECIMAL},
+			#{loginTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+    <update id="update" parameterType="htht.system.ocean.system.back.model.SysUserDO">
+        update sys_user
+        <set>
+            <if test="username != null">`username` = #{username},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="password != null">`password` = #{password},</if>
+            <if test="deptId != null">`dept_id` = #{deptId},</if>
+            <if test="email != null">`email` = #{email},</if>
+            <if test="mobile != null">`mobile` = #{mobile},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="userIdCreate != null">`user_id_create` = #{userIdCreate},</if>
+            <if test="gmtCreate != null">`gmt_create` = #{gmtCreate},</if>
+            <if test="gmtModified != null">`gmt_modified` = #{gmtModified},</if>
+            <if test="sex != null">`sex` = #{sex},</if>
+            <if test="birth != null">`birth` = #{birth},</if>
+            <if test="picId != null">`pic_id` = #{picId},</if>
+            <if test="liveAddress != null">`live_address` = #{liveAddress},</if>
+            <if test="hobby != null">`hobby` = #{hobby},</if>
+            <if test="province != null">`province` = #{province},</if>
+            <if test="city != null">`city` = #{city},</if>
+            <if test="district != null">`district` = #{district}</if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="remove">
+		delete from sys_user where user_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from sys_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <select id="listAllDept" resultType="long">
+		select DISTINCT dept_id from sys_user
+	</select>
+    <select id="getAllUser" resultType="htht.system.ocean.system.front.model.UserDO" resultMap="UserRoleNameResultMap">
+        select fu.*,fr.ROLE_NAME FROM FRONT_USER fu,FRONT_ROLE fr  where fu.ROLE_ID=fr.ROLE_ID
+    </select>
+</mapper>

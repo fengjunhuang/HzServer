@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.ShpesDataMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.ShpesData">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SHP_ID" jdbcType="DECIMAL" property="shpId" />
+    <result column="SHP_NAME" jdbcType="VARCHAR" property="shpName" />
+    <result column="SHP_TYPE" jdbcType="VARCHAR" property="shpType" />
+    <result column="FILE_IDS" jdbcType="VARCHAR" property="fileIds" />
+    <result column="DISPLAY_FILE" jdbcType="VARCHAR" property="displayFile" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="CRATE_TIME" jdbcType="TIMESTAMP" property="crateTime" />
+    <result column="CREATE_USER_ID" jdbcType="DECIMAL" property="createUserId" />
+    <result column="GEO_JSON" jdbcType="CLOB" property="geoJson" />
+    <result column="TBRANCH_ID" jdbcType="DECIMAL" property="tbranchId" />
+    <result column="WHETHER3D" jdbcType="DECIMAL" property="whether3d" />
+    <result column="DISPLAY_TYPE" jdbcType="VARCHAR" property="displayType"/>
+    <result column="SUBJECT_ID" jdbcType="DECIMAL" property="subjectId" />
+    <result column="ICON_TYPE" jdbcType="VARCHAR" property="iconType" />
+  </resultMap>
+  <insert id="insertshp" parameterType="htht.system.ocean.model.ShpesData">
+    <selectKey keyProperty="shpId" order="AFTER" resultType="java.lang.Long">
+      select SHPES_DATA_SEQUENCE.NEXTVAL from dual
+    </selectKey>
+    insert into SHPES_DATA (SHP_NAME, SHP_TYPE, FILE_IDS,
+    DISPLAY_FILE, COLOR, CRATE_TIME,
+    CREATE_USER_ID, GEO_JSON,TBRANCH_ID,WHETHER3D,DISPLAY_TYPE,ICON_TYPE)
+    values (#{shpName,jdbcType=VARCHAR}, #{shpType,jdbcType=VARCHAR}, #{fields,jdbcType=VARCHAR},
+    #{displayfield,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, #{crateTime,jdbcType=DATE},
+    #{createUserId,jdbcType=DECIMAL}, #{geoJson,jdbcType=CLOB}, #{tbranchId,jdbcType=DECIMAL},#{whether3d,jdbcType=DECIMAL},#{displayType,jdbcType=VARCHAR},
+  #{iconType,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateSujectId" parameterType="htht.system.ocean.model.ShpesData">
+    update SHPES_DATA
+    <set>
+      <if test="subjectId!= null">SUBJECT_ID = #{subjectId} </if>
+
+    </set>
+    where TBRANCH_ID = #{tbranchId}
+
+  </update>
+</mapper>

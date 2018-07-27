@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.Employee">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="LOGINNAME" jdbcType="VARCHAR" property="loginname" />
+    <result column="EMPLOYEE_NUM" jdbcType="VARCHAR" property="employeeNum" />
+    <result column="EMPLOYEE_NAME" jdbcType="VARCHAR" property="employeeName" />
+    <result column="EMPLOYEE_AGE" jdbcType="DECIMAL" property="employeeAge" />
+    <result column="EMPLOYEE_SEXUAL" jdbcType="VARCHAR" property="employeeSexual" />
+    <result column="EMPLOYEE_BIRTHDAY" jdbcType="TIMESTAMP" property="employeeBirthday" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="PEOPLES_CODE" jdbcType="VARCHAR" property="peoplesCode" />
+    <result column="EMPLOYEE_HOMETOWN" jdbcType="VARCHAR" property="employeeHometown" />
+    <result column="DEPARTMENT_CODE" jdbcType="VARCHAR" property="departmentCode" />
+    <result column="INDENTITY_CODE" jdbcType="VARCHAR" property="indentityCode" />
+    <result column="EMPLOYEE_ARR_DATE" jdbcType="TIMESTAMP" property="employeeArrDate" />
+    <result column="EMPLOYEE_WORK_DATE" jdbcType="TIMESTAMP" property="employeeWorkDate" />
+    <result column="OCCUPATIONTITLE_CODE" jdbcType="VARCHAR" property="occupationtitleCode" />
+    <result column="OCCUPATIONTITLE_TIME" jdbcType="TIMESTAMP" property="occupationtitleTime" />
+    <result column="MANAGE_DUTY_CODE" jdbcType="VARCHAR" property="manageDutyCode" />
+    <result column="EMPLOYEE_MANAGE_DUTY_DATE" jdbcType="TIMESTAMP" property="employeeManageDutyDate" />
+    <result column="RECORD_CODE" jdbcType="VARCHAR" property="recordCode" />
+    <result column="EMPLOYEE_RECORD_DATE" jdbcType="TIMESTAMP" property="employeeRecordDate" />
+    <result column="DEGREE_CODE" jdbcType="VARCHAR" property="degreeCode" />
+    <result column="EMPLOYEE_DEGREE_DATE" jdbcType="TIMESTAMP" property="employeeDegreeDate" />
+    <result column="ISUSED" jdbcType="DECIMAL" property="isused" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="PARENTID" jdbcType="DECIMAL" property="parentid" />
+    <result column="VISITECOUNT" jdbcType="DECIMAL" property="visitecount" />
+    <result column="EMP_CHECK" jdbcType="VARCHAR" property="empCheck" />
+    <result column="EMP_CHECKDETAIL" jdbcType="VARCHAR" property="empCheckdetail" />
+    <result column="PROTOCOLFILE" jdbcType="VARCHAR" property="protocolfile" />
+  </resultMap>
+</mapper>

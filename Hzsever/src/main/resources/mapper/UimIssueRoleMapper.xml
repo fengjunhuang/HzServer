@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.UimIssueRoleMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.UimIssueRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="ORDER_NUM" jdbcType="DECIMAL" property="orderNum" />
+    <result column="ISLOCK" jdbcType="DECIMAL" property="islock" />
+  </resultMap>
+</mapper>

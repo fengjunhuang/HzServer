@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.SysRoleMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.system.back.model.RoleDO">
+    <id column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="ROLE_SIGN" jdbcType="VARCHAR" property="roleSign" />
+    <result column="USER_ID_CREATE" jdbcType="VARCHAR" property="userIdCreate" />
+  </resultMap>
+  <select id="get" resultType="htht.system.ocean.system.back.model.RoleDO" resultMap="BaseResultMap">
+		select *
+		from sys_role where role_id = #{value}
+	</select>
+
+  <select id="list" resultType="htht.system.ocean.system.back.model.RoleDO" resultMap="BaseResultMap">
+    select *
+    from sys_role
+    <where>
+      <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+      <if test="roleName != null and roleName != ''"> and role_name = #{roleName} </if>
+      <if test="roleSign != null and roleSign != ''"> and role_sign = #{roleSign} </if>
+      <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+      <if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
+      <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+      <if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+    </where>
+    <choose>
+      <when test="sort != null and sort.trim() != ''">
+        order by ${sort} ${order}
+      </when>
+      <otherwise>
+        order by role_id desc
+      </otherwise>
+    </choose>
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+
+  <select id="count" resultType="int">
+    select count(*) from sys_role
+    <where>
+      <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+      <if test="roleName != null and roleName != ''"> and role_name = #{roleName} </if>
+      <if test="roleSign != null and roleSign != ''"> and role_sign = #{roleSign} </if>
+      <if test="remark != null and remark != ''"> and remark = #{remark} </if>
+      <if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
+      <if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+      <if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+    </where>
+  </select>
+
+  <insert id="save" parameterType="htht.system.ocean.system.back.model.RoleDO">
+		insert into SYS_ROLE
+		(
+		"ROLE_NAME",
+		"ROLE_SIGN",
+		"REMARK",
+		"USER_ID_CREATE",
+		"GMT_CREATE",
+		"GMT_MODIFIED"
+		)
+		values
+		(
+		#{roleName,jdbcType=VARCHAR},
+		#{roleSign,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{userIdCreate,jdbcType=VARCHAR},
+		#{gmtCreate,jdbcType=TIMESTAMP},
+		#{gmtModified,jdbcType=TIMESTAMP}
+		)
+	</insert>
+
+  <update id="update" parameterType="htht.system.ocean.system.back.model.RoleDO">
+    update sys_role
+    <set>
+      <if test="roleName != null">`role_name` = #{roleName}, </if>
+      <if test="roleSign != null">`role_sign` = #{roleSign}, </if>
+      <if test="remark != null">`remark` = #{remark}, </if>
+      <if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
+      <if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
+      <if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
+    </set>
+    where role_id = #{roleId}
+  </update>
+
+  <delete id="remove">
+		delete from sys_role where role_id = #{value}
+	</delete>
+
+  <delete id="batchRemove">
+    delete from sys_role where role_id in
+    <foreach item="roleId" collection="array" open="(" separator=","
+            close=")">
+      #{roleId}
+    </foreach>
+  </delete>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.ModelsDataMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.ModelsData">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="MODEL_ID" jdbcType="DECIMAL" property="modelId" />
+    <result column="BRANCH_ID" jdbcType="DECIMAL" property="nodeId" />
+    <result column="LON" jdbcType="FLOAT" property="lon" />
+    <result column="LAT" jdbcType="FLOAT" property="lat" />
+    <result column="HEIGHT" jdbcType="FLOAT" property="height" />
+    <result column="SCALE" jdbcType="FLOAT" property="scale" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath" />
+    <result column="XANGLE" jdbcType="FLOAT" property="xangle" />
+    <result column="YANGLE" jdbcType="FLOAT" property="yangle" />
+    <result column="ZANGLE" jdbcType="FLOAT" property="zangle" />
+    <result column="MODELS_NAME" jdbcType="VARCHAR" property="modelsName" />
+    <result column="SUBJECT_ID" jdbcType="VARCHAR" property="subjectId" />
+
+  </resultMap>
+  <update id="updateSujectId" parameterType="htht.system.ocean.model.ModelsData">
+  update MODELS_DATA
+  <set>
+    <if test="subjectId!= null">SUBJECT_ID = #{subjectId} </if>
+
+  </set>
+  where BRANCH_ID = #{branchId}
+  </update>
+</mapper>

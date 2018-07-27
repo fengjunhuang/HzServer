@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="htht.system.ocean.dao.ExceptionMapper">
+	<resultMap id="BaseResultMap" type="htht.system.ocean.system.back.model.ErrorBean">
+		<id column="ERROR_TYPE" jdbcType="DECIMAL" property="exceptionId"/>
+		<result column="ERROR_TYPE" jdbcType="VARCHAR" property="errorType"/>
+		<result column="ERROR_STACK_INFO" jdbcType="VARCHAR" property="errorStackInfo"/>
+	</resultMap>
+</mapper>

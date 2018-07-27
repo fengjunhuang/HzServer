@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.FrontRoleMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.system.front.model.RoleDO">
+    <id column="ROLE_ID" jdbcType="DECIMAL" property="roleId" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="USER_ID_CREATE" jdbcType="VARCHAR" property="userIdCreate" />
+    <result column="PERMISSIONS" jdbcType="VARCHAR" property="permissions" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.BranchMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.Branch">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="BRANCH_ID" jdbcType="DECIMAL" property="branchId" />
+    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="BRANCH_NAME" jdbcType="VARCHAR" property="branchName" />
+    <result column="CONTENT_ID" jdbcType="DECIMAL" property="contentId" />
+    <result column="NODE_TYPE" jdbcType="DECIMAL" property="nodeType" />
+    <result column="CREATE_DEPT_ID" jdbcType="DECIMAL" property="createDeptId" />
+    <result column="CHECK_DEPT_IDS" jdbcType="VARCHAR" property="checkDeptIds" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ICON_ID" jdbcType="VARCHAR" property="iconId" />
+    <result column="ZIP_PATH" jdbcType="VARCHAR" property="zipPath" />
+  </resultMap>
+
+
+  <insert id="createBranch" parameterType="htht.system.ocean.model.Branch">
+    <selectKey keyProperty="branchId" resultType="java.lang.Long" order="BEFORE">
+    select TB_BRANCH_SEQUENCEOO.NEXTVAL from dual
+    </selectKey>
+    insert into "TB_BRANCH" (CREATE_TIME, BRANCH_NAME, CONTENT_ID,NODE_TYPE,CREATE_DEPT_ID,CHECK_DEPT_IDS,UPDATE_TIME,BRANCH_ID,PARENT_ID,ICON_ID,ZIP_PATH)
+    values (#{createTime,jdbcType=DATE}, #{branchName,jdbcType=VARCHAR}, #{contentId,jdbcType=DECIMAL}, #{nodeType,jdbcType=DECIMAL}, #{createDeptId,jdbcType=DECIMAL}
+    , #{checkDeptIds,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{branchId,jdbcType=DECIMAL}, #{parentId,jdbcType=VARCHAR}, #{iconId,jdbcType=VARCHAR},#{zipPath,jdbcType=VARCHAR}
+    )
+  </insert>
+  <!--<update id="updateSujectId"  parameterType="java.util.List">-->
+
+    <!--<foreach collection="list" item="item" index="index">-->
+      <!--UPDATE TB_BRANCH set SUBJECT_ID = #{item.subjectId,jdbcType=DECIMAL}  WHERE BRANCH_ID = #{item.branchId,jdbcType=DECIMAL}-->
+    <!--</foreach>-->
+  <!--</update>-->
+  <update id="updateSujectId" parameterType="htht.system.ocean.model.Branch">
+    update TB_BRANCH
+    <set>
+      <if test="subjectId!= null">SUBJECT_ID = #{subjectId} </if>
+
+    </set>
+    where BRANCH_ID = #{branchId}
+  </update>
+</mapper>

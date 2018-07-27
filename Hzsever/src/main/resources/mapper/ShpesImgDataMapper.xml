@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.ShpesImgDataMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.ShpesImgData">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="IMG_ID" jdbcType="DECIMAL" property="imgId" />
+    <result column="SHP_CHILD_ID" jdbcType="DECIMAL" property="shpChildId" />
+    <result column="IMG_PATH" jdbcType="VARCHAR" property="imgPath" />
+    <result column="BRANCH_ID" jdbcType="DECIMAL" property="branchId" />
+    <result column="SHP_DESCRIBE" jdbcType="VARCHAR" property="shpDescribe" />
+  </resultMap>
+
+
+  <insert id="createImg" parameterType="htht.system.ocean.model.ShpesImgData">
+    <selectKey keyProperty="imgId" resultType="java.lang.Long" order="BEFORE">
+      select SYS_MENU_SEQUENCE.NEXTVAL from dual
+    </selectKey>
+    insert into "SHPES_IMG_DATA" (IMG_ID, SHP_CHILD_ID, IMG_PATH,BRANCH_ID,SHP_DESCRIBE)
+    values (#{imgId,jdbcType=DECIMAL}, #{shpChildId,jdbcType=DECIMAL}, #{imgPath,jdbcType=VARCHAR},#{branchId,jdbcType=DECIMAL},#{shpDescribe,jdbcType=VARCHAR}
+    )
+  </insert>
+</mapper>

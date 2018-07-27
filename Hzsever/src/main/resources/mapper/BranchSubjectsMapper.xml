@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="htht.system.ocean.dao.BranchSubjectsMapper">
+  <resultMap id="BaseResultMap" type="htht.system.ocean.model.BranchSubjects">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SUB_ID" jdbcType="DECIMAL" property="subId" />
+    <result column="SUB_NAME" jdbcType="VARCHAR" property="subName" />
+    <result column="NODE_LIST" jdbcType="VARCHAR" property="nodeList" />
+    <result column="CREATE_USERID" jdbcType="VARCHAR" property="createUserid" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+
+  </resultMap>
+
+
+  <insert id="create" parameterType="htht.system.ocean.model.BranchSubjects">
+    <selectKey keyProperty="subId" resultType="java.lang.Long" order="BEFORE">
+      select TB_BRANCH_SEQUENCEOO.NEXTVAL from dual
+    </selectKey>
+    insert into "BRANCH_SUBJECTS" (SUB_NAME, NODE_LIST, CREATE_USERID,CREATE_TIME)
+    values (#{subName,jdbcType=VARCHAR}, #{nodeList,jdbcType=VARCHAR}, #{createUserid,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+
+    )
+  </insert>
+</mapper>
