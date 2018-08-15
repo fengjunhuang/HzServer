@@ -1,19 +1,19 @@
 package htht.system.ocean.system.front.model;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "FRONT_USER")
 public class UserDO {
     private static final long serialVersionUID = 1L;
-    @Id
+
     @Column(name = "USER_ID")
     private Long userId;
+    @Id
     @Column(name = "USER_NAME")
     private String userName;
     @Column(name = "USER_ALIAS")
@@ -30,12 +30,22 @@ public class UserDO {
     private Long status;
     @Column(name = "ROLE_ID")
     private Long roleId;
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Transient
     private String roleName;
 
     @Transient
     private List<Long> roleIds;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Long getRoleId() {
         return roleId;

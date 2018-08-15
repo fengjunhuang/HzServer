@@ -20,9 +20,10 @@ public interface FrontRoleMapper extends Mapper<RoleDO> {
 	
 	int save(RoleDO role);
 	
-	int update(RoleDO role);
+
 	
 	int remove(Long roleId);
 	
 	int batchRemove(Long[] roleIds);
+	int create(RoleDO roleDO);
 }

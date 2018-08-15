@@ -1,26 +1,31 @@
 package htht.system.ocean.controller;
+
 import com.alibaba.fastjson.JSON;
-import htht.system.ocean.core.Result;
-import htht.system.ocean.core.ResultGenerator;
-import htht.system.ocean.model.*;
-import htht.system.ocean.service.BranchService;
-import htht.system.ocean.service.BranchSubjectsService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import htht.system.ocean.core.Result;
+import htht.system.ocean.core.ResultGenerator;
+import htht.system.ocean.model.BranchSubjects;
+import htht.system.ocean.model.ModelsData;
+import htht.system.ocean.model.NodeList;
+import htht.system.ocean.model.ShpesData;
+import htht.system.ocean.service.BranchService;
+import htht.system.ocean.service.BranchSubjectsService;
 import htht.system.ocean.service.ModelsDataService;
 import htht.system.ocean.service.ShpesDataService;
 import htht.system.ocean.util.ObjectUtils;
 import io.swagger.annotations.ApiOperation;
-
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.service.ApiListing;
 import tk.mybatis.mapper.entity.Condition;
-import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
 * Created by CodeGenerator on 2018/04/18.
@@ -130,6 +135,7 @@ public Result update(@RequestBody @Validated String jsonParams ) {
 
         return ResultGenerator.genSuccessResult(branchSubjects);
     }
+    @RequiresPermissions({"上传"})
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {

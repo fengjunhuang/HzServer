@@ -11,10 +11,11 @@ public class PermissionUtils {
     public static List<PermissionVO> getAllPermissions(){
         if (PERMISSIONS==null){
             PERMISSIONS=new ArrayList<>();
-            PERMISSIONS.add(new PermissionVO("添加",MyConstants.Resource.ADD));
-            PERMISSIONS.add(new PermissionVO("删除",MyConstants.Resource.DELETE));
-            PERMISSIONS.add(new PermissionVO("修改",MyConstants.Resource.EDIT));
-            PERMISSIONS.add(new PermissionVO("查看",MyConstants.Resource.LOOK));
+            PERMISSIONS.add(new PermissionVO("行政区划",MyConstants.Resource.行政区划));
+            PERMISSIONS.add(new PermissionVO("上传",MyConstants.Resource.上传));
+            PERMISSIONS.add(new PermissionVO("海域管理界限",MyConstants.Resource.海域管理界限));
+            PERMISSIONS.add(new PermissionVO("剖面图",MyConstants.Resource.剖面图));
+
         }
         return PERMISSIONS;
     }

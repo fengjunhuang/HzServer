@@ -33,7 +33,7 @@ function getMenuTreeData() {
                url: "/front/role/getPermissions",
                success: function (permissions) {
                    console.log(permissions);
-                   loadPermissions(permissions);
+                   // loadPermissions(permissions);
                }
            });
 }
@@ -43,8 +43,6 @@ function loadPermissions(permissions) {
     if (permissions != null && permissions.length > 0) {
         for (var i = 0; i < permissions.length; i++) {
             var permission = permissions[i];
-            console.log(permission.name);
-            console.log(permission.type);
             var domStr = '<label class="checkbox-inline">';
             domStr += '<input name="permission" type="checkbox" value="' + permission.type + '" >';
             domStr += permission.name;
@@ -71,6 +69,19 @@ function parseDom(arg) {
 function save() {
     $('#menuIds').val(menuIds);
     var role = $('#signupForm').serialize();
+
+    var permissions =[];
+    $("#roleWrap input:checkbox").each(function () {
+        if ($(this).is(':checked')) {
+            var aa  = $(this).attr('id');
+            permissions.push(aa)
+        }
+    });
+    // console.log(permissions.join())
+    var newPermissions = permissions.join();
+    var role = $('#signupForm').serializeArray();
+    console.log(role[4]);
+    role[4].value =  newPermissions;
     $.ajax({
                cache: true,
                type: "POST",

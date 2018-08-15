@@ -26,6 +26,7 @@ function login() {
 	$.ajax({
 		url: BASE_PATH + '/sso/login',
 		type: 'POST',
+
 		data: {
 			username: $('#username').val(),
 			password: $('#password').val(),

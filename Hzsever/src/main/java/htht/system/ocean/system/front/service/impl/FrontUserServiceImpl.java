@@ -3,7 +3,17 @@ package htht.system.ocean.system.front.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
+import htht.system.ocean.core.AbstractService;
+import htht.system.ocean.dao.DepartmentMapper;
+import htht.system.ocean.dao.FrontUserMapper;
+import htht.system.ocean.dao.FrontUserRoleMapper;
+import htht.system.ocean.system.back.model.BuildTree;
+import htht.system.ocean.system.back.model.DeptDO;
+import htht.system.ocean.system.back.model.Tree;
+import htht.system.ocean.system.back.service.UserService;
+import htht.system.ocean.system.front.model.UserDO;
+import htht.system.ocean.system.front.model.UserRoleDO;
+import htht.system.ocean.system.front.service.FrontUserService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,18 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import htht.system.ocean.core.AbstractService;
-import htht.system.ocean.dao.DepartmentMapper;
-import htht.system.ocean.dao.FrontUserMapper;
-import htht.system.ocean.dao.FrontUserRoleMapper;
-import htht.system.ocean.system.back.model.BuildTree;
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.Tree;
-import htht.system.ocean.system.back.service.UserService;
-import htht.system.ocean.system.front.model.UserDO;
-import htht.system.ocean.system.front.model.UserRoleDO;
-import htht.system.ocean.system.front.service.FrontUserService;
 
 @Transactional
 @Service
@@ -45,21 +43,17 @@ public class FrontUserServiceImpl extends AbstractService<UserDO> implements Fro
     @Transactional
     @Override
     public int addUser(UserDO userDO) {
-        List<Long> roleIds = userDO.getRoleIds();
-        if (roleIds != null && roleIds.size() > 0) {
-            for (Long roleId : roleIds) {
-                UserRoleDO roleDO = new UserRoleDO();
+        Long roleId = userDO.getRoleId();
+        UserRoleDO roleDO = new UserRoleDO();
 //                roleDO.setId(roleId);
-                roleDO.setRoleId(roleId);
-                roleDO.setUserId(userDO.getUserId());
-                int index = userRoleMapper.insertSelective(roleDO);
-                if (index <= 0) {
-                    throw new RuntimeException("用户角色添加失败");
-                }
-            }
+        roleDO.setRoleId(roleId);
+        roleDO.setUserId(userDO.getUserId());
+        int index = userRoleMapper.insertSelective(roleDO);
+        if (index <= 0) {
+            throw new RuntimeException("用户角色添加失败");
         }
         int insert = userMapper.insertSelective(userDO);
-        if (insert<=0){
+        if (insert <= 0) {
             throw new RuntimeException("用户添加失败");
         }
         return insert;
@@ -67,15 +61,15 @@ public class FrontUserServiceImpl extends AbstractService<UserDO> implements Fro
 
     @Override
     public PageInfo getAllUserByPage(Map<String, Object> params) {
-        PageHelper.startPage(Integer.parseInt((String)params.get("offset")), Integer.parseInt((String)params.get("limit")));
-        List<UserDO> list = userMapper.getAllUser();
+        PageHelper.startPage(Integer.parseInt((String) params.get("offset")), Integer.parseInt((String) params.get("limit")));
+        List<UserDO> list = userMapper.selectAll();
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }
 
     @Override
     @Transactional
-    public int updateUserInfo(UserDO userDO){
+    public int updateUserInfo(UserDO userDO) {
         int update = userMapper.updateByPrimaryKey(userDO);
         return update;
     }

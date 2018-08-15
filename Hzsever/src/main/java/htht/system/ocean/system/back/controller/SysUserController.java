@@ -2,30 +2,20 @@ package htht.system.ocean.system.back.controller;
 
 
 import com.github.pagehelper.PageHelper;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
-import java.util.Map;
-
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.R;
-import htht.system.ocean.system.back.model.RoleDO;
-import htht.system.ocean.system.back.model.SysUserDO;
-import htht.system.ocean.system.back.model.Tree;
+import htht.system.ocean.system.back.model.*;
 import htht.system.ocean.system.back.service.RoleService;
 import htht.system.ocean.system.back.service.UserService;
 import htht.system.ocean.util.PageUtils;
 import htht.system.ocean.util.Query;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/sys/user")
 @Controller
@@ -80,6 +70,8 @@ public class SysUserController extends BaseController {
     @PostMapping("/save")
     @ResponseBody
     R save(SysUserDO user) {
+	    user.setUserId(12l);
+	    user.setLoginTime(new Date(System.currentTimeMillis()));
         if (userService.save(user) > 0) {
             return R.ok();
         }

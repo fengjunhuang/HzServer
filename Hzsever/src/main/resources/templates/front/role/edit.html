@@ -26,13 +26,14 @@
 										type="text" th:value="${role.remark}">
 								</div>
 							</div>
-							<input type="hidden" name="permissions" id="permissions" value="${role.permissions}">
+							<input type="hidden" name="permissions" id="permissions" th:value="${menu}">
 							<div class="form-group">
 								<label class="col-sm-3 control-label">权限：</label>
-								<div class="col-sm-8">
+								<div class="col-sm-8" id="roleWrap">
 									<label th:each="permission:${permissions}" class="checkbox-inline">
-										<input name="permission" type="checkbox" th:value="${permission.type}"
-											   th:text="${permission.name}">
+										<input  name="permission" type="checkbox" th:id="${permission.menuId}"
+												th:checked="${permission.chooseBol}"
+											   th:text="${permission.menuName}"  >
 									</label>
 								</div>
 							</div>

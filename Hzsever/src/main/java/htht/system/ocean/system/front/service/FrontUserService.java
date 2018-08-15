@@ -2,16 +2,14 @@ package htht.system.ocean.system.front.service;
 
 
 import com.github.pagehelper.PageInfo;
-
+import htht.system.ocean.system.back.model.DeptDO;
+import htht.system.ocean.system.back.model.Tree;
+import htht.system.ocean.system.front.model.UserDO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
-
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.Tree;
-import htht.system.ocean.system.front.model.UserDO;
 
 @Service
 public interface FrontUserService extends htht.system.ocean.core.Service<UserDO> {

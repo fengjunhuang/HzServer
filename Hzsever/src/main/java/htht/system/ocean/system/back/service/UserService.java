@@ -1,17 +1,16 @@
 package htht.system.ocean.system.back.service;
 
 
+import htht.system.ocean.system.back.model.DeptDO;
+import htht.system.ocean.system.back.model.SysUserDO;
+import htht.system.ocean.system.back.model.Tree;
+import htht.system.ocean.system.back.model.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.SysUserDO;
-import htht.system.ocean.system.back.model.Tree;
-import htht.system.ocean.system.back.model.UserVO;
 
 @Service
 public interface UserService  {

@@ -1,6 +1,11 @@
 package htht.system.ocean.system.back.service.impl;
 
 
+import htht.system.ocean.dao.DepartmentMapper;
+import htht.system.ocean.dao.SysUserMapper;
+import htht.system.ocean.dao.SysUserRoleMapper;
+import htht.system.ocean.system.back.model.*;
+import htht.system.ocean.system.back.service.UserService;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,22 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import htht.system.ocean.dao.DepartmentMapper;
-import htht.system.ocean.dao.SysUserMapper;
-import htht.system.ocean.dao.SysUserRoleMapper;
-import htht.system.ocean.system.back.model.BuildTree;
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.SysUserDO;
-import htht.system.ocean.system.back.model.Tree;
-import htht.system.ocean.system.back.model.UserRoleDO;
-import htht.system.ocean.system.back.model.UserVO;
-import htht.system.ocean.system.back.service.UserService;
+import java.util.*;
 
 @Transactional
 @Service

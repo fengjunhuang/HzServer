@@ -53,7 +53,7 @@ public class BranchController {
     @ApiImplicitParam(name = "parentId", value = "父亲节点id", required = true, dataType = "String")
 
     @PostMapping("/createBranch")
-    public Result add(@RequestBody @Validated String jsonParams) {
+    public Result add( @RequestBody @Validated String jsonParams) {
 
 
         Branch branch = JSON.parseObject(jsonParams, Branch.class);

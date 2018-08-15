@@ -44,7 +44,22 @@ function getMenuTreeData() {
 }
 function update() {
 	$('#menuIds').val(menuIds);
-	var role = $('#signupForm').serialize();
+	var permissions=$("#permissions").val();
+	console.log(permissions);
+	var permissions =[];
+    $("#roleWrap input:checkbox").each(function () {
+        if ($(this).is(':checked')) {
+            var aa  = $(this).attr('id');
+            permissions.push(aa)
+        }
+    });
+	// console.log(permissions.join())
+	var newPermissions = permissions.join();
+    var role = $('#signupForm').serializeArray();
+    console.log(role[4]);
+    role[4].value =  newPermissions;
+    console.log(role[4])
+	// console.log(role)
 	$.ajax({
 		cache : true,
 		type : "POST",

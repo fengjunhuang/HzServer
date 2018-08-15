@@ -1,10 +1,9 @@
 package htht.system.ocean.system.back.controller;
 
 
-import org.springframework.stereotype.Controller;
-
 import htht.system.ocean.system.front.model.UserDO;
 import htht.system.ocean.util.ShiroUtils;
+import org.springframework.stereotype.Controller;
 
 @Controller
 public class BaseController {

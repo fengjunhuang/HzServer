@@ -1,5 +1,6 @@
 $().ready(function() {
 	validateRule();
+	checkNormalRole();
 });
 
 $.validator.setDefaults({
@@ -7,25 +8,27 @@ $.validator.setDefaults({
 		save();
 	}
 });
+function checkNormalRole() {
+    $("input:radio[name='role']")[0].che
+    return roleId;
+}
 function getCheckedRoles() {
-	var adIds = "";
-	$("input:checkbox[name=role]:checked").each(function(i) {
-		if (0 == i) {
-			adIds = $(this).val();
-		} else {
-			adIds += ("," + $(this).val());
-		}
-	});
-	return adIds;
+    var roleId="";
+    $("input:radio[name='role']:checked").each(function(i) {
+        console.log($(this).val())
+        roleId= $(this).val();
+        return;
+    });
+    return roleId;
 }
 function save() {
+    $("#roleId").val(getCheckedRoles());
     var deptId = $("#deptId").val();
     console.log(deptId)
     if (deptId==''){
         parent.layer.alert('请选择一个部门');
         return;
     }
-	$("#roleIds").val(getCheckedRoles());
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -72,6 +75,13 @@ function validateRule() {
 				// 	}
 				// }
 			},
+            roleId : {
+                required : true,
+            },
+            password : {
+                required : true,
+                minlength : 6
+            },
             deptId : {
                 required : true,
                 deptId : true
@@ -92,6 +102,10 @@ function validateRule() {
 				minlength : icon + "用户名必须两个字符以上",
 				remote : icon + "用户名已经存在"
 			},
+            password : {
+                required : icon + "请输入您的密码",
+                minlength : icon + "密码必须6个字符以上"
+            },
             confirm_dept : {
                 required : icon+"请选择一个部门",
             },

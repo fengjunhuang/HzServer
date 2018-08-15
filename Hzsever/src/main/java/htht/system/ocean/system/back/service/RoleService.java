@@ -1,11 +1,10 @@
 package htht.system.ocean.system.back.service;
 
 
+import htht.system.ocean.system.back.model.RoleDO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import htht.system.ocean.system.back.model.RoleDO;
 
 @Service
 public interface RoleService {

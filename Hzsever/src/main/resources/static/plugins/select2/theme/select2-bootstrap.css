@@ -197,7 +197,7 @@
 
 .select2-container--bootstrap.select2-container--open {
   /**
-     * Make the dropdown arrow Point up while the dropdown is visible.
+     * Make the dropdown arrow point up while the dropdown is visible.
      */
   /**
      * Handle border radii of the container when the dropdown is showing.
@@ -492,7 +492,7 @@
 
 .select2-container--bootstrap .select2-selection.input-lg.select2-container--open .select2-selection--single {
   /**
-     * Make the dropdown arrow Point up while the dropdown is visible.
+     * Make the dropdown arrow point up while the dropdown is visible.
      */
 }
 
@@ -503,7 +503,7 @@
 
 .input-group-lg .select2-container--bootstrap .select2-selection.select2-container--open .select2-selection--single {
   /**
-     * Make the dropdown arrow Point up while the dropdown is visible.
+     * Make the dropdown arrow point up while the dropdown is visible.
      */
 }
 

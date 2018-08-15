@@ -1,25 +1,23 @@
 package htht.system.ocean.web;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import htht.system.ocean.configurer.Constant;
-
 import htht.system.ocean.configurer.UploadProperties;
 import htht.system.ocean.core.Result;
 import htht.system.ocean.core.ResultGenerator;
 import htht.system.ocean.model.*;
 import htht.system.ocean.service.*;
-import htht.system.ocean.util.*;
+import htht.system.ocean.util.FileUtil;
+import htht.system.ocean.util.GdalUtil;
+import htht.system.ocean.util.ZipUtil;
 import io.swagger.annotations.ApiParam;
-import org.apache.tools.ant.taskdefs.Length;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.bson.Document;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +29,6 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -90,6 +87,7 @@ public class FileUploadController {
      * @author 单红宇(CSDN CATOOP)
      * @create 2017年3月11日
      */
+    @RequiresPermissions({"上传"})
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     @ResponseBody
     public String upload(@RequestParam("file") MultipartFile file) {

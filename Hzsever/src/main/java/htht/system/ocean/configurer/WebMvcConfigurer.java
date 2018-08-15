@@ -1,10 +1,13 @@
-package htht.system.ocean.configurer;
+package htht.system.ocean.configurer;//package htht.system.ocean.configurer;
+//
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-
+import htht.system.ocean.core.Result;
+import htht.system.ocean.core.ResultCode;
+import htht.system.ocean.core.ServiceException;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,29 +15,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import htht.system.ocean.core.Result;
-import htht.system.ocean.core.ResultCode;
-import htht.system.ocean.core.ServiceException;
 
 
 @Configuration
@@ -108,54 +105,55 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-        registry.addResourceHandler("/img/**").addResourceLocations("file:"+Constant.IMG);
-        registry.addResourceHandler("/objModel/**").addResourceLocations("file:"+Constant.ZIPPATH);
-        /*  registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");*/
-
-    }
-//   @Override
+//    @Override
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        super.addResourceHandlers(registry);
-//       registry.addResourceHandler("/img/**").addResourceLocations("file:"+Constant.IMG);
-//       registry.addResourceHandler("swagger-ui.html")
+//        registry.addResourceHandler("swagger-ui.html")
 //                .addResourceLocations("classpath:/META-INF/resources/");
 //        registry.addResourceHandler("/webjars/**")
 //                .addResourceLocations("classpath:/META-INF/resources/webjars/");
 //
-////        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
+//        registry.addResourceHandler("/objModel/**").addResourceLocations("file:"+ Constant.ZIPPATH);
+//
+//
 //
 //    }
-    //添加拦截器
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        //接口签名认证拦截器，该签名认证比较简单，实际项目中可以使用Json Web Token或其他更好的方式替代。
-        if (!"dev".equals(env)) { //开发环境忽略签名认证
-            registry.addInterceptor(new HandlerInterceptorAdapter() {
-                @Override
-                public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                    //验证签名
-                    boolean pass = validateSign(request);
-                    if (pass) {
-                        return true;
-                    } else {
-                        logger.warn("签名认证失败，请求接口：{}，请求IP：{}，请求参数：{}",
-                                request.getRequestURI(), getIpAddress(request), JSON.toJSONString(request.getParameterMap()));
+   @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        super.addResourceHandlers(registry);
 
-                        Result result = new Result();
-                        result.setCode(ResultCode.UNAUTHORIZED).setMessage("签名认证失败");
-                        responseResult(response, result);
-                        return false;
-                    }
-                }
-            });
-        }
+       registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
+
     }
+//    //添加拦截器
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        //接口签名认证拦截器，该签名认证比较简单，实际项目中可以使用Json Web Token或其他更好的方式替代。
+//        if (!"dev".equals(env)) { //开发环境忽略签名认证
+//            registry.addInterceptor(new HandlerInterceptorAdapter() {
+//                @Override
+//                public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//                    //验证签名
+//                    boolean pass = validateSign(request);
+//                    if (pass) {
+//                        return true;
+//                    } else {
+//                        logger.warn("签名认证失败，请求接口：{}，请求IP：{}，请求参数：{}",
+//                                request.getRequestURI(), getIpAddress(request), JSON.toJSONString(request.getParameterMap()));
+//
+//                        Result result = new Result();
+//                        result.setCode(ResultCode.UNAUTHORIZED).setMessage("签名认证失败");
+//                        responseResult(response, result);
+//                        return false;
+//                    }
+//                }
+//            });
+//        }
+//    }
 
     private void responseResult(HttpServletResponse response, Result result) {
         response.setCharacterEncoding("UTF-8");

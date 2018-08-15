@@ -10,9 +10,7 @@ $.validator.setDefaults({
 	}
 });
 function update() {
-	console.log($("#roleId").val())
 	$("#roleId").val(getCheckedRoles());
-    console.log($("#roleId").val())
 	$.ajax({
 		cache : true,
 		type : "POST",

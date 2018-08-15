@@ -1,6 +1,11 @@
 package htht.system.ocean.system.back.service.impl;
 
 
+import htht.system.ocean.dao.DepartmentMapper;
+import htht.system.ocean.system.back.model.BuildTree;
+import htht.system.ocean.system.back.model.DeptDO;
+import htht.system.ocean.system.back.model.Tree;
+import htht.system.ocean.system.back.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,12 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import htht.system.ocean.dao.DepartmentMapper;
-import htht.system.ocean.system.back.model.BuildTree;
-import htht.system.ocean.system.back.model.DeptDO;
-import htht.system.ocean.system.back.model.Tree;
-import htht.system.ocean.system.back.service.DeptService;
 
 
 @Service

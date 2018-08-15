@@ -2,28 +2,9 @@ package htht.system.ocean.system.front.controller;
 
 
 import com.github.pagehelper.PageInfo;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import htht.system.ocean.core.Result;
 import htht.system.ocean.core.ResultGenerator;
+import htht.system.ocean.dao.FrontUserMapper;
 import htht.system.ocean.system.back.controller.BaseController;
 import htht.system.ocean.system.back.model.DeptDO;
 import htht.system.ocean.system.back.model.FrontUserVO;
@@ -35,6 +16,17 @@ import htht.system.ocean.system.front.service.FrontRoleService;
 import htht.system.ocean.system.front.service.FrontUserService;
 import htht.system.ocean.util.GsonHelper;
 import htht.system.ocean.util.OkHttpUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/front/user")
 @Controller
@@ -44,21 +36,16 @@ public class UserController extends BaseController {
     FrontUserService mFrontUserService;
     @Autowired
     FrontRoleService roleService;
+    @Autowired
+    FrontUserMapper frontUserMapper;
 
-	@RequiresPermissions("sys:user:user")
+//	@RequiresPermissions("sys:user:user")
     @GetMapping("")
     String user(Model model) {
         return prefix + "/user";
     }
 
-    @PostMapping("/login")
-    @ResponseBody
-    Result login(@RequestBody FrontUserVO frontUserVO ){
-        String resultJson = OkHttpUtils.getSync("");
-        UserDO userDO = GsonHelper.fromJsontoBean(resultJson, UserDO.class);
-        mFrontUserService.saveUserInfo(userDO);
-	    return ResultGenerator.genSuccessResult(userDO);
-    }
+
 
 	@GetMapping("/list")
 	@ResponseBody
@@ -67,7 +54,7 @@ public class UserController extends BaseController {
 		return pageInfo;
 	}
 
-    @RequiresPermissions("sys:user:add")
+//    @RequiresPermissions("sys:user:add")
     @GetMapping("/add")
     String add(Model model) {
         List<RoleDO> roles = roleService.findAll();
@@ -77,10 +64,19 @@ public class UserController extends BaseController {
 
 //    @RequiresPermissions("sys:user:edit")
     @GetMapping("/edit/{id}")
-    String edit(Model model, @PathVariable("id") Long id) {
-        UserDO userDO = mFrontUserService.findById(id);
+    String edit(Model model, @PathVariable("id") String id) {
+
+        UserDO userDO = frontUserMapper.selectByPrimaryKey(id);
         model.addAttribute("user", userDO);
-        List<RoleDO> roles = roleService.list(id);
+        List<RoleDO> roles = roleService.list();
+        for(RoleDO roleDO:roles){
+            if(roleDO.getRoleId().equals(userDO.getRoleId())){
+                roleDO.setRoleSign(true);
+            }else {
+                roleDO.setRoleSign(false);
+            }
+
+        }
         model.addAttribute("roles", roles);
         return prefix + "/edit";
     }
@@ -96,7 +92,7 @@ public class UserController extends BaseController {
         return R.error();
     }
 
-    @RequiresPermissions("sys:user:edit")
+//    @RequiresPermissions("sys:user:edit")
     @PostMapping("/update")
     @ResponseBody
     R update(UserDO user) {
@@ -106,8 +102,8 @@ public class UserController extends BaseController {
         return R.error();
     }
 
-
-    @RequiresPermissions("sys:user:edit")
+//
+//    @RequiresPermissions("sys:user:edit")
     @PostMapping("/updatePeronal")
     @ResponseBody
     R updatePeronal(UserDO user) {
@@ -118,7 +114,7 @@ public class UserController extends BaseController {
     }
 
 
-    @RequiresPermissions("sys:user:remove")
+//    @RequiresPermissions("sys:user:remove")
     @PostMapping("/remove")
     @ResponseBody
     R remove(Long id) {
@@ -128,7 +124,7 @@ public class UserController extends BaseController {
         return R.error();
     }
 
-    @RequiresPermissions("sys:user:batchRemove")
+//    @RequiresPermissions("sys:user:batchRemove")
     @PostMapping("/batchRemove")
     @ResponseBody
     R batchRemove(@RequestParam("ids[]") Long[] userIds) {

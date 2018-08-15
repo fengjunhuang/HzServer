@@ -8,6 +8,17 @@
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
     <result column="USER_ID_CREATE" jdbcType="VARCHAR" property="userIdCreate" />
-    <result column="PERMISSIONS" jdbcType="VARCHAR" property="permissions" />
+
+
   </resultMap>
+
+  <insert id="create" parameterType="htht.system.ocean.model.FrontRole">
+    <selectKey keyProperty="roleId" resultType="java.lang.Long" order="BEFORE">
+      select TB_BRANCH_SEQUENCEOO.NEXTVAL from dual
+    </selectKey>
+    insert into "FRONT_ROLE" (ROLE_ID, ROLE_NAME, REMARK,GMT_CREATE,GMT_MODIFIED,USER_ID_CREATE)
+    values (#{roleId,jdbcType=DECIMAL}, #{roleName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=DATE}
+     ,#{gmtModified,jdbcType=DATE},#{userIdCreate,jdbcType=VARCHAR}
+    )
+  </insert>
 </mapper>

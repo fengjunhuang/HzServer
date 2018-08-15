@@ -1,36 +1,29 @@
 package htht.system.ocean.system.back.service.impl;
 
 
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import htht.system.ocean.dao.SysMenuMapper;
 import htht.system.ocean.dao.SysRoleMenuMapper;
 import htht.system.ocean.system.back.model.BuildTree;
 import htht.system.ocean.system.back.model.MenuDO;
 import htht.system.ocean.system.back.model.Tree;
 import htht.system.ocean.system.back.service.MenuService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Condition;
+
+import java.util.*;
 
 @SuppressWarnings("AlibabaRemoveCommentedCode")
 @Service
 @Transactional(readOnly = true,rollbackFor = Exception.class)
 public class MenuServiceImpl implements MenuService {
 	@Autowired
-	SysMenuMapper menuMapper;
+    SysMenuMapper menuMapper;
 	@Autowired
-	SysRoleMenuMapper roleMenuMapper;
+    SysRoleMenuMapper roleMenuMapper;
 
 	/**
 	 * @param

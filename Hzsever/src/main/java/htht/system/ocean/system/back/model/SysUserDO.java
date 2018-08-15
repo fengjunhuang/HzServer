@@ -1,13 +1,12 @@
 package htht.system.ocean.system.back.model;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "SYS_USER")
 public class SysUserDO implements Serializable {
