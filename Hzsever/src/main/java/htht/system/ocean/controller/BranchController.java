@@ -3,21 +3,16 @@ package htht.system.ocean.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import htht.system.ocean.configurer.Constant;
 import htht.system.ocean.core.Result;
 import htht.system.ocean.core.ResultGenerator;
 import htht.system.ocean.model.Branch;
 import htht.system.ocean.service.BranchService;
 import htht.system.ocean.service.ShpesDataService;
-import htht.system.ocean.util.FileUtil;
-import htht.system.ocean.util.GdalUtil;
+import htht.system.ocean.util.ReadFileUtil;
 import htht.system.ocean.util.RestFulServiceUtil;
-import htht.system.ocean.util.TextUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import oracle.jdbc.proxy.annotation.Post;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -26,6 +21,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -244,5 +240,16 @@ public class BranchController {
 
         return resultList;
     }
+    @RequestMapping(value = {"getJsonFile"}, method = {RequestMethod.GET}, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Object getFile(Long branchId, HttpServletResponse rsp) {
 
+        Branch branch = branchService.findById(branchId);
+
+
+        String data = ReadFileUtil.readFileByLinesForJson(branch.getZipPath());
+
+
+        return JSON.parse(data);
+    }
 }

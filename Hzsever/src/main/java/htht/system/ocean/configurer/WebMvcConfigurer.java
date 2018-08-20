@@ -122,11 +122,11 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
         super.addResourceHandlers(registry);
 
        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-
-        registry.addResourceHandler("/static/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/static/");
+               .addResourceLocations("classpath:/META-INF/resources/");
+       registry.addResourceHandler("/webjars/**")
+               .addResourceLocations("classpath:/META-INF/resources/webjars/");
+       registry.addResourceHandler("/img/**").addResourceLocations("file:"+Constant.IMG);
+       registry.addResourceHandler("/objModel/**").addResourceLocations("file:"+Constant.ZIPPATH);
 
     }
 //    //添加拦截器

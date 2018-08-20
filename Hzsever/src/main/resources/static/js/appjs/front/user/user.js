@@ -69,12 +69,9 @@ function load(deptId) {
                         field: 'userAlias',
                         title: '姓名'
                     },
+
                     {
                         field: 'deptName',
-                        title: '部门'
-                    },
-                    {
-                        field: 'roleName',
                         title: '角色'
                     },
                     {

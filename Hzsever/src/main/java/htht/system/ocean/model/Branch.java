@@ -1,12 +1,15 @@
 package htht.system.ocean.model;
 
-import java.util.Date;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Table(name = "TB_BRANCH")
+@ApiModel(value="user对象",description="用户对象user")
 public class Branch {
 
     @Id
@@ -15,7 +18,7 @@ public class Branch {
 
     @Column(name = "CREATE_TIME")
     private Date createTime;
-
+    @ApiModelProperty(value = "姓名", example = "maxTse",position = 1)
     @Column(name = "BRANCH_NAME")
     private String branchName;
 
