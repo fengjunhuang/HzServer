@@ -2,8 +2,10 @@ package htht.system.ocean.model;
 
 
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "FILE_DATA")
 public class FileData {

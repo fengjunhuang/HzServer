@@ -1,12 +1,11 @@
 package htht.system.ocean.dao;
 
+import htht.system.ocean.core.Mapper;
+import htht.system.ocean.system.back.model.SysUserDO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
-import htht.system.ocean.core.Mapper;
-import htht.system.ocean.system.back.model.SysUserDO;
 
 @Repository
 public interface SysUserMapper extends Mapper<SysUserDO> {
@@ -25,4 +24,5 @@ public interface SysUserMapper extends Mapper<SysUserDO> {
     int batchRemove(Long[] userIds);
 
     Long[] listAllDept();
+
 }

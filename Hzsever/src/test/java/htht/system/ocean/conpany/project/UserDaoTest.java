@@ -2,38 +2,27 @@ package htht.system.ocean.conpany.project;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import htht.system.ocean.dao.UserDaoImpl;
 import htht.system.ocean.model.*;
 import htht.system.ocean.service.BranchService;
 import htht.system.ocean.service.ShpesDataService;
 import htht.system.ocean.service.ShpesImgDataService;
-
 import htht.system.ocean.util.FileUtil;
 import org.bson.Document;
 import org.gdal.gdal.gdal;
-
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.geo.Distance;
-
-import org.springframework.data.geo.GeoModule;
-import org.springframework.data.geo.Metrics;
-import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,6 +55,38 @@ public class UserDaoTest {
         gdal.GetLastErrorMsg();
     }
 
+
+    // 使用BufferedInputStream
+
+    @Test
+    public void useBufferIStream(){
+
+        try {
+            long begin = System.currentTimeMillis();
+            File file  = new File("D:\\upload\\1536807316210dmdz.zip.geojosn");
+            FileInputStream fis = new FileInputStream(file);
+            String s = "";
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            byte[] buffer = new byte[1024];
+            int cnt = 0;
+            String tempString = null;
+            StringBuilder sb = new StringBuilder();//定义一个字符串缓存，将字符串存放缓存中
+            while((cnt=bis.read(buffer)) != -1) {
+
+                sb.append(new String(buffer, 0, cnt));
+            }
+            tempString=sb.toString();
+            bis.close();
+
+            System.out.println("=====BufferIStream===== time: " + (System.currentTimeMillis() - begin) + "ms");
+            System.out.println(tempString);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+
+    }
     @Test
     public void findUserByUserName(){
         Query query = new Query();

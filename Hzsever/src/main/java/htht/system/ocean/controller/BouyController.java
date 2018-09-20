@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ public class BouyController {
             return ResultGenerator.genParameterFailResult();
         }
         JSONObject jsonObject = JSON.parseObject(s);
+
 
 
         return ResultGenerator.genSuccessResult(jsonObject.getJSONArray("data"));

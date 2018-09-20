@@ -1,32 +1,22 @@
 package htht.system.ocean;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.util.ResourceUtils;
 
 import javax.servlet.MultipartConfigElement;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
 @EnableTransactionManagement
 @ServletComponentScan
 @SpringBootApplication
 public class Application {
+    private final static Logger logger = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) throws FileNotFoundException
 
 
@@ -36,7 +26,8 @@ public class Application {
 ////            params.add(new BasicNameValuePair("userName", "Sun"));
 //       String url =ipAddress+"branch/list";
 //        getRest(url,params);
-
+        logger.info("logback 成功了");
+        logger.error("logback 成功了");
       SpringApplication.run(Application.class, args);
 
     }

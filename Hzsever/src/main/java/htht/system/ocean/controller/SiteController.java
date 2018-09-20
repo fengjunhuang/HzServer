@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import htht.system.ocean.core.Result;
 import htht.system.ocean.core.ResultGenerator;
 import htht.system.ocean.model.Discharge;
-import htht.system.ocean.model.ShpesImgData;
 import htht.system.ocean.model.SiteModel;
-import htht.system.ocean.model.ZhanWeiShuJu;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -120,7 +118,7 @@ List<SiteModel> siteModels= mongoTemplate.find(query,SiteModel.class);
 //
 //           }
 //           if(bean.getPhosphoric().equals("—")){
-//               bean.setPhosphoric(null);
+//               bean.setPhosphoric(null);-
 //
 //           }
 //           if(bean.getDissolvedOxygen().equals("—")){

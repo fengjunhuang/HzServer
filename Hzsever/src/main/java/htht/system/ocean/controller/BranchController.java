@@ -90,8 +90,10 @@ public class BranchController {
     public Result deleteById(@RequestBody @Validated String jsonParams) {
         Branch branch = JSON.parseObject(jsonParams, Branch.class);
         int result = branchService.deleteById(branch.getBranchId());
+
         mongoTemplate.dropCollection(branch.getBranchId()+"");
-//        FileUtil.deleteDirectory(  branch.getZipPath());
+////       String path= branchService.findById(branch.getBranchId()).getZipPath();
+//      FileUtil.deleteDirectory( path);
         if (result == 1) {
             //删除名录下的所有文件
             String ids = "";
@@ -165,7 +167,8 @@ public class BranchController {
 /*    @PostMapping("/detail")
     public Result detail(@RequestParam Integer id) {
  *//*       Branch branch = branchService.findById(id);*//*
-        return ResultGenerator.genSuccessResult(branch);
+        return ResultGenerator.genSuccessResu
+        lt(branch);
     }*/
 
     @PostMapping("/queryBranchByParentId")
