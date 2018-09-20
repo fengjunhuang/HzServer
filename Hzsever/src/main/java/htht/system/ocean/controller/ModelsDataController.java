@@ -43,7 +43,7 @@ public class ModelsDataController {
 
         ModelsData modelsData=null;
         modelsData= modelsDataService.findBy("branchId",branch.getBranchId());
-      String json=modelsData.toString();
+
       Branch branch1=      branchService.findById(branch.getBranchId());
         HashMap<String, Object> map=    (HashMap<String, Object>) (ObjectUtils.objectToMap( modelsData)) ;
         map.put("branchName",branch1.getBranchName());
