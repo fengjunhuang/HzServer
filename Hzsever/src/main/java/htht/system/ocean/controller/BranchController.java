@@ -249,10 +249,15 @@ public class BranchController {
 
         Branch branch = branchService.findById(branchId);
 
+       if(branch.getZipPath()!=null){
+           String data = ReadFileUtil.readFileByLinesForJson(branch.getZipPath());
+           return JSON.parse(data);
+       }else {
+           return   ResultGenerator.genFailResult("没有这个josn文件");
+       }
 
-        String data = ReadFileUtil.readFileByLinesForJson(branch.getZipPath());
 
 
-        return JSON.parse(data);
+
     }
 }

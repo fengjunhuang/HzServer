@@ -135,7 +135,7 @@ public Result update(@RequestBody @Validated String jsonParams ) {
 
         return ResultGenerator.genSuccessResult(branchSubjects);
     }
-    @RequiresPermissions({"上传"})
+
 
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size) {

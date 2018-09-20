@@ -72,11 +72,11 @@ public class ReadFileUtil {
             // 一次读入一行，直到读入null为文件结束
             while ((tempString = reader.readLine()) != null) {
                 // 显示行号
-
+                System.out.println("line " + line + ": " + tempString);
                 line++;
                 s=s+tempString;
             }
-            System.out.println("line " + line + ": " + tempString);
+
             s=TextUtil.replaceBlank(s);
             System.out.println( tempString);
             reader.close();
@@ -199,15 +199,18 @@ public class ReadFileUtil {
             InputStreamReader isr = new InputStreamReader(new FileInputStream(file), fileEncode);
             reader = new BufferedReader(isr);
             String tempString = null;
+
+            StringBuffer sb=new StringBuffer();
             int line = 1;
             // 一次读入一行，直到读入null为文件结束
             while ((tempString = reader.readLine()) != null) {
                 // 显示行号
-
+                System.out.println("line " + line + ": " + tempString);
+                sb.append(tempString+"\n");
                 line++;
-                s=s+tempString;
+
             }
-            System.out.println("line " + line + ": " + tempString);
+            s=sb.toString();
             s=TextUtil.replaceBlank(s)+"]}";
             System.out.println( tempString);
             reader.close();

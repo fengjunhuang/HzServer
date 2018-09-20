@@ -320,7 +320,7 @@ public class FileUploadController {
                                             Document doc = Document.parse(shpesData.getGeoJson());
                                             Object object= doc.get("");
 
-                                            mongoTemplate.insert(doc,branch.getBranchId()+"");
+//                                            mongoTemplate.insert(doc,branch.getBranchId()+"");
                                             System.out.println( System.currentTimeMillis()-b+" mongoTemplate耗时");
 
 
